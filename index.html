@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="mr" class="scroll-smooth">
+<html lang="mr" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>répondez s'il vous plaît</title>
+  
+  <!-- IBM Plex Sans and IBM Plex Sans Devanagari via Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Devanagari:wght@300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Devanagari:wght@300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -14,332 +18,286 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"IBM Plex Sans Devanagari"', '"IBM Plex Sans"', 'sans-serif'],
-            latin: ['"IBM Plex Sans"', 'sans-serif'],
+            sans: ['"IBM Plex Sans"', '"IBM Plex Sans Devanagari"', 'sans-serif'],
           },
           colors: {
-            brand: {
-              50: '#f0fdfa',
-              100: '#ccfbf1',
-              400: '#2dd4bf',
-              500: '#14b8a6',
-              600: '#0d9488',
-              800: '#115e59',
+            warmpaper: {
+              50: '#FAF8F5',
+              100: '#F5EFEB',
+              200: '#EADECE',
+              800: '#23201D',
+              900: '#171513',
             }
           }
         }
       }
-    };
+    }
   </script>
+
   <style>
     body {
-      font-family: 'IBM Plex Sans Devanagari', 'IBM Plex Sans', sans-serif;
+      font-family: 'IBM Plex Sans', 'IBM Plex Sans Devanagari', sans-serif;
       word-break: normal;
       overflow-wrap: break-word;
-      hyphens: none;
+      hyphens: manual;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .body-justified {
+    .article-body p {
       text-align: justify;
       text-justify: inter-word;
+      word-break: normal;
+      overflow-wrap: break-word;
+      hyphens: manual;
     }
 
-    @keyframes gentleFloat {
+    /* Subtle SVG keyframe animations for calm communication theme */
+    @keyframes pulse-wave {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.08); opacity: 0.95; }
+    }
+    @keyframes float-message {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes float-response {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-7px) rotate(1.2deg); }
+      50% { transform: translateY(-4px) rotate(1deg); }
+    }
+    @keyframes sparkle-glow {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); }
     }
 
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.45; transform: scale(1); }
-      50% { opacity: 0.85; transform: scale(1.05); }
-    }
-
-    @keyframes soundWave {
-      0%, 100% { transform: scaleY(0.4); }
-      50% { transform: scaleY(1); }
-    }
-
-    @keyframes orbitRotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .anim-float {
-      animation: gentleFloat 6s ease-in-out infinite;
-    }
-
-    .anim-float-delayed {
-      animation: gentleFloat 7s ease-in-out 1.5s infinite;
-    }
-
-    .anim-glow {
-      animation: pulseGlow 4s ease-in-out infinite;
+    .anim-pulse {
+      animation: pulse-wave 4s ease-in-out infinite;
       transform-origin: center;
     }
-
-    .sound-bar-1 { animation: soundWave 1.3s ease-in-out infinite; transform-origin: bottom; }
-    .sound-bar-2 { animation: soundWave 1.6s ease-in-out 0.25s infinite; transform-origin: bottom; }
-    .sound-bar-3 { animation: soundWave 1.4s ease-in-out 0.5s infinite; transform-origin: bottom; }
-    .sound-bar-4 { animation: soundWave 1.8s ease-in-out 0.3s infinite; transform-origin: bottom; }
-
-    .orbit-ring {
-      animation: orbitRotate 30s linear infinite;
-      transform-origin: 200px 140px;
+    .anim-message {
+      animation: float-message 5s ease-in-out infinite;
+    }
+    .anim-response {
+      animation: float-response 4.5s ease-in-out 0.8s infinite;
+    }
+    .anim-sparkle {
+      animation: sparkle-glow 3s ease-in-out infinite;
+      transform-origin: center;
     }
   </style>
 </head>
-<body class="bg-stone-50 text-stone-800 dark:bg-stone-950 dark:text-stone-200 transition-colors duration-300 min-h-screen flex flex-col selection:bg-teal-500/20 selection:text-teal-900 dark:selection:text-teal-200">
+<body class="bg-[#FAF8F5] text-stone-800 dark:bg-[#151413] dark:text-stone-200 min-h-screen transition-colors duration-300 antialiased selection:bg-amber-200 dark:selection:bg-amber-900/60">
 
-  <header class="sticky top-0 z-40 backdrop-blur-md bg-stone-50/80 dark:bg-stone-950/80 border-b border-stone-200/60 dark:border-stone-800/80 transition-colors duration-300">
-    <div class="max-w-3xl mx-auto px-5 py-3.5 flex items-center justify-between">
-      <span class="text-xs uppercase tracking-widest font-semibold text-teal-600 dark:text-teal-400 font-latin select-none">
-        RSVP
-      </span>
+  <nav class="sticky top-0 z-30 backdrop-blur-md bg-[#FAF8F5]/85 dark:bg-[#151413]/85 border-b border-stone-200/70 dark:border-stone-800/80 transition-colors duration-300">
+    <div class="max-w-2xl mx-auto px-5 py-3.5 flex justify-end items-center gap-2.5">
+      <!-- Share Button -->
+      <button id="shareButton" type="button" aria-label="Share" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 shadow-sm hover:bg-stone-50 dark:hover:bg-stone-750 text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/40 active:scale-95">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+      </button>
 
-      <!-- Action buttons: Share & Theme Switcher -->
-      <div class="flex items-center space-x-2">
-        <!-- Share button -->
-        <button id="shareBtn" type="button" aria-label="Share this document" title="Share" class="p-2.5 rounded-full text-stone-600 hover:text-stone-900 bg-stone-100 hover:bg-stone-200 dark:text-stone-300 dark:bg-stone-900 dark:hover:bg-stone-800 dark:hover:text-stone-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
-          </svg>
-        </button>
-
-        <!-- Theme toggle button -->
-        <button id="themeToggleBtn" type="button" aria-label="Toggle light and dark theme" title="Toggle theme" class="p-2.5 rounded-full text-stone-600 hover:text-stone-900 bg-stone-100 hover:bg-stone-200 dark:text-stone-300 dark:bg-stone-900 dark:hover:bg-stone-800 dark:hover:text-stone-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500">
-          <!-- Sun icon (for dark mode) -->
-          <svg id="sunIcon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-          <!-- Moon icon (for light mode) -->
-          <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-        </button>
-      </div>
+      <!-- Theme Toggle Button -->
+      <button id="themeToggle" type="button" aria-label="Toggle Theme" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 shadow-sm hover:bg-stone-50 dark:hover:bg-stone-750 text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/40 active:scale-95">
+        <!-- Sun icon (shown in dark mode) -->
+        <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon icon (shown in light mode) -->
+        <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
     </div>
-  </header>
+  </nav>
 
-  <main class="flex-grow max-w-3xl w-full mx-auto px-5 sm:px-8 py-8 sm:py-14">
-    
-    <!-- Light & Colorful Animated SVG Graphic for RSVP / Communication / Listening -->
-    <div class="flex justify-center mb-8 sm:mb-12">
-      <div class="relative w-full max-w-sm aspect-[4/3] flex items-center justify-center">
-        <!-- Subtle back glow -->
-        <div class="absolute inset-0 bg-gradient-to-tr from-teal-400/20 via-sky-400/20 to-amber-300/20 dark:from-teal-500/10 dark:via-cyan-500/10 dark:to-emerald-500/10 rounded-full blur-2xl anim-glow"></div>
-        
-        <svg viewBox="0 0 400 280" class="w-full h-full relative z-10 drop-shadow-sm select-none" xmlns="http://www.w3.org/2000/svg">
+  <main class="max-w-2xl mx-auto px-4 sm:px-6 pt-6 pb-20">
+    <div class="bg-white/80 dark:bg-stone-900/70 border border-stone-200/90 dark:border-stone-800 shadow-[0_4px_24px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.3)] rounded-3xl p-6 sm:p-10 md:p-12 transition-all">
+
+      <!-- Animated SVG representing 'répondez s'il vous plaît' (Communication, Listening, Gentle Response) -->
+      <div class="flex justify-center mb-7 select-none">
+        <svg class="w-full max-w-[280px] sm:max-w-[320px] h-auto drop-shadow-sm" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="gradBubbleLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#38bdf8" />
-              <stop offset="100%" stop-color="#0284c7" />
+            <linearGradient id="bgGlow" x1="50" y1="40" x2="350" y2="200" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FEF3C7" stop-opacity="0.8"/>
+              <stop offset="50%" stop-color="#E0E7FF" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="#FCE7F3" stop-opacity="0.8"/>
             </linearGradient>
-            <linearGradient id="gradBubbleRight" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#34d399" />
-              <stop offset="100%" stop-color="#0d9488" />
+            <linearGradient id="cardGrad1" x1="90" y1="50" x2="230" y2="170" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="100%" stop-color="#EFF6FF"/>
             </linearGradient>
-            <linearGradient id="gradLetter" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fbbf24" />
-              <stop offset="100%" stop-color="#f59e0b" />
+            <linearGradient id="cardGrad2" x1="170" y1="80" x2="310" y2="200" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFFBEB"/>
+              <stop offset="100%" stop-color="#FEF3C7"/>
             </linearGradient>
-            <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
-              <stop offset="50%" stop-color="#f43f5e" stop-opacity="0.4"/>
-              <stop offset="100%" stop-color="#34d399" stop-opacity="0.6"/>
-            </linearGradient>
+            <filter id="softShadow" x="-10%" y="-10%" width="130%" height="130%">
+              <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.08"/>
+            </filter>
           </defs>
 
-          <!-- Orbiting subtle dotted communication ring -->
-          <g class="orbit-ring">
-            <ellipse cx="200" cy="140" rx="150" ry="85" fill="none" stroke="url(#ringGrad)" stroke-width="1.8" stroke-dasharray="4 8" opacity="0.65" />
-            <circle cx="350" cy="140" r="5" fill="#f59e0b" />
-            <circle cx="50" cy="140" r="4" fill="#0284c7" />
+          <!-- Ambient soft waves of connection -->
+          <circle class="anim-pulse" cx="200" cy="120" r="100" fill="url(#bgGlow)"/>
+          <path d="M70 120 C 130 90, 270 150, 330 120" stroke="#F59E0B" stroke-width="1.8" stroke-dasharray="4 6" opacity="0.6"/>
+          <path d="M80 140 C 150 170, 250 80, 320 110" stroke="#6366F1" stroke-width="1.8" stroke-dasharray="3 5" opacity="0.45"/>
+
+          <!-- Primary Conversation Bubble / Letter (The Message) -->
+          <g class="anim-message" filter="url(#softShadow)">
+            <rect x="75" y="60" width="140" height="95" rx="18" fill="url(#cardGrad1)" stroke="#BFDBFE" stroke-width="1.5"/>
+            <!-- Gentle lines representing careful words spoken -->
+            <rect x="95" y="82" width="60" height="6" rx="3" fill="#93C5FD"/>
+            <rect x="95" y="96" width="95" height="6" rx="3" fill="#CBD5E1"/>
+            <rect x="95" y="110" width="75" height="6" rx="3" fill="#CBD5E1"/>
+            <circle cx="190" cy="85" r="4" fill="#3B82F6"/>
           </g>
 
-          <!-- Speaking / Listening Wave connecting parties -->
-          <path d="M 140 140 Q 200 110 260 140" fill="none" stroke="#a7f3d0" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="2 6" />
-
-          <!-- Left Speech Bubble: Listening & Words (Floats softly) -->
-          <g class="anim-float">
-            <!-- Bubble Body -->
-            <path d="M 85 90 C 85 68 103 50 125 50 L 175 50 C 197 50 215 68 215 90 C 215 112 197 130 175 130 L 120 130 L 95 150 L 102 127 C 92 120 85 106 85 90 Z" 
-                  fill="url(#gradBubbleLeft)" 
-                  fill-opacity="0.9" />
-            
-            <!-- Audio / Listening Waves inside bubble -->
-            <g fill="#ffffff" opacity="0.95">
-              <rect class="sound-bar-1" x="125" y="80" width="4" height="24" rx="2" />
-              <rect class="sound-bar-2" x="135" y="74" width="4" height="34" rx="2" />
-              <rect class="sound-bar-3" x="145" y="70" width="4" height="42" rx="2" />
-              <rect class="sound-bar-4" x="155" y="76" width="4" height="30" rx="2" />
-              <rect class="sound-bar-1" x="165" y="82" width="4" height="20" rx="2" />
-            </g>
+          <!-- Gentle Listening & Responsive Heart / Speech (The RSVP Response) -->
+          <g class="anim-response" filter="url(#softShadow)">
+            <rect x="185" y="85" width="140" height="95" rx="18" fill="url(#cardGrad2)" stroke="#FDE68A" stroke-width="1.5"/>
+            <rect x="205" y="107" width="55" height="6" rx="3" fill="#FBBF24"/>
+            <rect x="205" y="121" width="90" height="6" rx="3" fill="#FDE68A"/>
+            <rect x="205" y="135" width="70" height="6" rx="3" fill="#E2E8F0"/>
+            <!-- Heart icon denoting mindful, reciprocal hospitality -->
+            <path d="M296 112 C 296 109 292 107 289.5 109.5 C 287 107 283 109 283 112 C 283 116 289.5 120 289.5 120 C 289.5 120 296 116 296 112 Z" fill="#F59E0B"/>
           </g>
 
-          <!-- Right Speech Bubble: Response / RSVP (Delayed gentle float) -->
-          <g class="anim-float-delayed">
-            <!-- Bubble Body -->
-            <path d="M 315 155 C 315 133 297 115 275 115 L 225 115 C 203 115 185 133 185 155 C 185 171 192 185 202 192 L 195 215 L 220 195 L 275 195 C 297 195 315 177 315 155 Z" 
-                  fill="url(#gradBubbleRight)" 
-                  fill-opacity="0.9" />
-            
-            <!-- Letter / Invitation RSVP Icon -->
-            <g transform="translate(228, 137)">
-              <rect x="0" y="0" width="44" height="30" rx="4" fill="#ffffff" opacity="0.95" />
-              <path d="M 0 0 L 22 17 L 44 0" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M 2 28 L 16 14" stroke="#99f6e4" stroke-width="2" stroke-linecap="round"/>
-              <path d="M 42 28 L 28 14" stroke="#99f6e4" stroke-width="2" stroke-linecap="round"/>
-            </g>
-          </g>
-
-          <!-- Central Resonant Heart/Empathy badge representing genuine listening -->
-          <g transform="translate(186, 126)">
-            <circle cx="14" cy="14" r="14" fill="#ffffff" class="drop-shadow" />
-            <path d="M 14 20 C 14 20 8 16 8 12 C 8 9.8 9.8 8 12 8 C 13.2 8 14 8.7 14 8.7 C 14 8.7 14.8 8 16 8 C 18.2 8 20 9.8 20 12 C 20 16 14 20 14 20 Z" 
-                  fill="#f43f5e" />
+          <!-- Sparkling accents signifying attentive understanding -->
+          <g class="anim-sparkle">
+            <polygon points="195,45 198,52 205,55 198,58 195,65 192,58 185,55 192,52" fill="#F59E0B"/>
+            <circle cx="330" cy="72" r="3.5" fill="#38BDF8"/>
+            <polygon points="70,165 72,170 77,172 72,174 70,179 68,174 63,172 68,170" fill="#EC4899"/>
+            <circle cx="200" cy="195" r="3" fill="#A855F7"/>
           </g>
         </svg>
       </div>
-    </div>
 
-    <article class="space-y-6 sm:space-y-7 leading-relaxed sm:leading-loose text-base sm:text-lg text-stone-700 dark:text-stone-300">
-      
-      <!-- Document Title: Centered as in original -->
-      <h1 class="text-center font-medium tracking-wide text-2xl sm:text-3xl text-stone-900 dark:text-stone-100 mb-8 sm:mb-10 font-latin">
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-center text-stone-900 dark:text-stone-100 mb-8 sm:mb-10 font-sans">
         répondez s'il vous plaît
       </h1>
 
-      <!-- Paragraph 1 -->
-      <p class="body-justified">
-        कोणतेही संभाषण व्यवस्थित, कोणत्याही प्रकारचा वाद, गैरसमज अथवा अविश्वास निर्माण न होता व्हायला हवे असेल तर त्यात योग्य वेळ, सभ्य आणि शक्यतोवर अचूक शब्दरचना, शांत देहबोली व भाषेचा ‘टोन’ खूप महत्वाचा ठरतो. या सर्वांना कृतज्ञतेच्या भावनेचा आधार असल्यास सोन्याहून पिवळे! परंतु इतके सर्व असले तरी ‘कम्युनिकेशन फ्रूटफूल’ व्हायला हवे असेल तर त्यात अजून एक घटक महत्वाचा असतो तो म्हणजे सुयोग्य प्रतिसाद – response; आणि त्यासाठी कामी येते ते ऐकणे, समजून घेणे.
-      </p>
+      <div class="article-body space-y-5 text-base sm:text-lg leading-[1.8] text-stone-700 dark:text-stone-300">
+        <p>कोणतेही संभाषण व्यवस्थित, कोणत्याही प्रकारचा वाद, गैरसमज अथवा अविश्वास निर्माण न होता व्हायला हवे असेल तर त्यात योग्य वेळ, सभ्य आणि शक्यतोवर अचूक शब्दरचना, शांत देहबोली व भाषेचा ‘टोन’ खूप महत्वाचा ठरतो. या सर्वांना कृतज्ञतेच्या भावनेचा आधार असल्यास सोन्याहून पिवळे! परंतु इतके सर्व असले तरी ‘कम्युनिकेशन फ्रूटफूल’ व्हायला हवे असेल तर त्यात अजून एक घटक महत्वाचा असतो तो म्हणजे सुयोग्य प्रतिसाद – response; आणि त्यासाठी कामी येते ते ऐकणे, समजून घेणे.</p>
 
-      <!-- Paragraph 2 -->
-      <p class="body-justified">
-        कोणत्याही संभाषणात ‘आपण ऐकतो का?’ हा प्रश्न खरंच स्वतःला विचारून पाहायला हवा. कारण आपण बऱ्याचदा समोरची व्यक्ती काय ‘म्हणते’ आहे ते नीट समजून घेण्याऐवजी फक्त वाचल्या जाणाऱ्या, कानांवर पडणाऱ्या शब्दांचा विचार करत असतो; पुढचे शब्द काय असतील याचा अंदाज लावत असतो.
-      </p>
+        <p>कोणत्याही संभाषणात ‘आपण ऐकतो का?’ हा प्रश्न खरंच स्वतःला विचारून पाहायला हवा. कारण आपण बऱ्याचदा समोरची व्यक्ती काय ‘म्हणते’ आहे ते नीट समजून घेण्याऐवजी फक्त वाचल्या जाणाऱ्या, कानांवर पडणाऱ्या शब्दांचा विचार करत असतो; पुढचे शब्द काय असतील याचा अंदाज लावत असतो.</p>
 
-      <!-- Paragraph 3 -->
-      <p class="body-justified">
-        माहितीविस्फोटाच्या जमान्यात फोनमधे सतत वाजत राहणाऱ्या ‘टिंग्ज’, भरून ओसंडून वाहणाऱ्या ‘कामाच्या याद्या’ आणि इतर अनेक गोष्टींनी आपले लक्ष विचलित होत असते. याखेरीज आपल्या डोक्यात सतत असणारे, उद्भवणारे विचार देखील आपल्या ऐकण्याच्या क्रियेच्या मधे-मधे येत असतात.
-      </p>
+        <p>माहितीविस्फोटाच्या जमान्यात फोनमधे सतत वाजत राहणाऱ्या ‘टिंग्ज’, भरून ओसंडून वाहणाऱ्या ‘कामाच्या याद्या’ आणि इतर अनेक गोष्टींनी आपले लक्ष विचलित होत असते. याखेरीज आपल्या डोक्यात सतत असणारे, उद्भवणारे विचार देखील आपल्या ऐकण्याच्या क्रियेच्या मधे-मधे येत असतात.</p>
 
-      <!-- Paragraph 4 -->
-      <p class="body-justified">
-        एखादे संभाषण चालू असताना आपल्याला असेच वाटत असते की आपण ‘ऐकतोय’ पण प्रत्यक्षात आपण चालू असलेल्या संवादात बोलण्याची, म्हणजे स्वतःचे विचार, सल्ला किंवा निर्णय सांगण्याची संधी कधी मिळते याची वाट पहात असतो. थोडक्यात काय तर अशा संभाषणात आपला सहभाग हा ‘समजून’ घेण्यासाठी नव्हे तर ‘उत्तर’ देण्यासाठी असतो.
-      </p>
+        <p>एखादे संभाषण चालू असताना आपल्याला असेच वाटत असते की आपण ‘ऐकतोय’ पण प्रत्यक्षात आपण चालू असलेल्या संवादात बोलण्याची, म्हणजे स्वतःचे विचार, सल्ला किंवा निर्णय सांगण्याची संधी कधी मिळते याची वाट पहात असतो. थोडक्यात काय तर अशा संभाषणात आपला सहभाग हा ‘समजून’ घेण्यासाठी नव्हे तर ‘उत्तर’ देण्यासाठी असतो.</p>
 
-      <!-- Paragraph 5 -->
-      <p class="body-justified">
-        लक्षपूर्वक ऐकणे ही खरे तर इतरांशी खराखुरा संवाद साधण्याची अत्यंत उत्तम कला आहे. संभाषण ‘ऐकणे’ आणि नुसतेच ‘कानावर पडणे’ यात खूप मोठा फरक आहे. दुसऱ्याचे म्हणणे नीट लक्ष देऊन ऐकणे, मग ते लेखी असो वा बोली, हे त्याचे खरेतर मनापासून केलेले मानसिक आदरातिथ्य असते. त्याने नाते, मैत्री वृद्धिंगत होण्यास मदत होते.
-      </p>
+        <div class="text-center text-amber-600/90 dark:text-amber-400/90 text-lg sm:text-xl tracking-widest my-6 select-none">
+          ⚝⚝⚝
+        </div>
 
-      <!-- Paragraph 6 -->
-      <p class="body-justified">
-        फ्रेंच भाषेत एक वाक्य आहे - répondez s'il vous plaît - RSVP. या शब्दरचनेचा अर्थ आहे response please - कृपया प्रतिसाद द्यावा.
-      </p>
+        <p>लक्षपूर्वक ऐकणे ही खरे तर इतरांशी खराखुरा संवाद साधण्याची अत्यंत उत्तम कला आहे. संभाषण ‘ऐकणे’ आणि नुसतेच ‘कानावर पडणे’ यात खूप मोठा फरक आहे. दुसऱ्याचे म्हणणे नीट लक्ष देऊन ऐकणे, मग ते लेखी असो वा बोली, हे त्याचे खरेतर मनापासून केलेले मानसिक आदरातिथ्य असते. त्याने नाते, मैत्री वृद्धिंगत होण्यास मदत होते.</p>
 
-      <!-- Paragraph 7 -->
-      <p class="body-justified">
-        आपल्यातील प्रत्येकाकडे सांगण्यासारखे काहीतरी असते. ज्याची त्याची, लहान असो वा मोठी, पण कदाचित बोध घेण्यासारखी स्वतंत्र कथा असते. म्हणून कोणत्याही संभाषणात ऐकले पाहिजे; नव्हे नीट लक्ष देऊन ऐकले पाहिजे. मग असा हा संवाद कोणाशीही का असेना; जवळच्या व्यक्तीशी, मित्रांशी किंवा अगदी नवीनच ओळख झालेल्या व्यक्तीशी. कोणास ठाऊक कोणाचे लक्षपूर्वक ऐकलेले कोणते शब्द आपल्याला आयुष्यात एका वेगळ्याच उंचीवर जायला मदत करतील ते.
-      </p>
+        <div class="text-center text-amber-600/90 dark:text-amber-400/90 text-lg sm:text-xl tracking-widest my-6 select-none">
+          ⚝⚝⚝
+        </div>
 
-      <!-- Paragraph 8 -->
-      <p class="body-justified">
-        खरंच, कितीतरी गोष्टी सहज होऊन जातात RSVP ने.
-      </p>
+        <p>फ्रेंच भाषेत एक वाक्य आहे - répondez s'il vous plaît - RSVP या शब्दरचनेचा अर्थ आहे response please - कृपया प्रतिसाद द्यावा.</p>
 
-      <!-- Centered date code from original document -->
-      <div class="text-center font-normal pt-4 tracking-widest text-stone-600 dark:text-stone-400">
-        २०२५०७२१
+        <div class="text-center text-amber-600/90 dark:text-amber-400/90 text-lg sm:text-xl tracking-widest my-6 select-none">
+          ⚝⚝⚝
+        </div>
+
+        <p>आपल्यातील प्रत्येकाकडे सांगण्यासारखे काहीतरी असते. ज्याची त्याची, लहान असो वा मोठी, पण कदाचित बोध घेण्यासारखी स्वतंत्र कथा असते. म्हणून कोणत्याही संभाषणात ऐकले पाहिजे; नव्हे नीट लक्ष देऊन ऐकले पाहिजे. मग असा हा संवाद कोणाशीही का असेना; जवळच्या व्यक्तीशी, मित्रांशी किंवा अगदी नवीनच ओळख झालेल्या व्यक्तीशी. कोणास ठाऊक कोणाचे लक्षपूर्वक ऐकलेले कोणते शब्द आपल्याला आयुष्यात एका वेगळ्याच उंचीवर जायला मदत करतील ते.</p>
+
+        <p>खरंच, कितीतरी गोष्टी सहज होऊन जातात RSVP ने.</p>
+
+        <div class="text-center text-stone-500 dark:text-stone-400 text-sm sm:text-base tracking-widest pt-4 pb-2 select-none">
+          ⚝⚝२०२५०७२१⚝⚝⚝
+        </div>
       </div>
-
-    </article>
+    </div>
   </main>
 
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2.5 rounded-full bg-stone-900 text-stone-100 dark:bg-stone-100 dark:text-stone-900 text-sm shadow-xl opacity-0 pointer-events-none transition-opacity duration-300 z-50 flex items-center space-x-2">
-    <svg class="w-4 h-4 text-teal-400 dark:text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-    </svg>
-    <span id="toastMsg">Link copied to clipboard</span>
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2.5 rounded-full bg-stone-900 text-stone-100 dark:bg-stone-100 dark:text-stone-900 text-xs sm:text-sm font-medium shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2">
+    लिंक कॉपी झाली आहे
   </div>
 
   <script>
-    (function() {
-      // Theme handling
-      const htmlEl = document.documentElement;
-      const themeToggleBtn = document.getElementById('themeToggleBtn');
+    (function () {
+      const html = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
       const sunIcon = document.getElementById('sunIcon');
       const moonIcon = document.getElementById('moonIcon');
+      const shareButton = document.getElementById('shareButton');
+      const toast = document.getElementById('toast');
 
-      function updateThemeIcons(isDark) {
+      // Theme Initialization
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        html.classList.add('dark');
+        html.classList.remove('light');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        html.classList.add('light');
+        html.classList.remove('dark');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+
+      // Theme Switcher Handler
+      themeToggle.addEventListener('click', function () {
+        const isDark = html.classList.toggle('dark');
+        html.classList.toggle('light', !isDark);
+        
         if (isDark) {
           sunIcon.classList.remove('hidden');
           moonIcon.classList.add('hidden');
+          localStorage.setItem('theme', 'dark');
         } else {
           sunIcon.classList.add('hidden');
           moonIcon.classList.remove('hidden');
+          localStorage.setItem('theme', 'light');
         }
-      }
-
-      // Read initial theme preference
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const isInitialDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
-
-      if (isInitialDark) {
-        htmlEl.classList.add('dark');
-        updateThemeIcons(true);
-      } else {
-        htmlEl.classList.remove('dark');
-        updateThemeIcons(false);
-      }
-
-      themeToggleBtn.addEventListener('click', function() {
-        const isDarkNow = htmlEl.classList.toggle('dark');
-        localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
-        updateThemeIcons(isDarkNow);
       });
 
-      // Toast helper
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toastMsg');
-      let toastTimeout = null;
-
+      // Show Toast Notification
       function showToast(message) {
-        toastMsg.textContent = message;
-        toast.classList.remove('opacity-0', 'pointer-events-none');
-        toast.classList.add('opacity-100');
-        if (toastTimeout) clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(function() {
-          toast.classList.remove('opacity-100');
-          toast.classList.add('opacity-0', 'pointer-events-none');
-        }, 2600);
+        if (!toast) return;
+        if (message) toast.textContent = message;
+        toast.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        setTimeout(function () {
+          toast.classList.remove('opacity-100', 'translate-y-0');
+          toast.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+        }, 2500);
       }
 
-      // Share functionality
-      const shareBtn = document.getElementById('shareBtn');
-      shareBtn.addEventListener('click', function() {
+      // Share Handler (Web Share API with fallback to copy command)
+      shareButton.addEventListener('click', async function () {
         const shareData = {
           title: "répondez s'il vous plaît",
           text: "répondez s'il vous plaît - RSVP",
           url: window.location.href
         };
 
-        if (navigator.share) {
-          navigator.share(shareData).catch(function(err) {
-            // If share rejected or aborted, fallback quietly or gracefully
-            if (err.name !== 'AbortError') {
-              copyToClipboardFallback();
-            }
-          });
-        } else {
-          copyToClipboardFallback();
+        if (navigator.share && window.isSecureContext) {
+          try {
+            await navigator.share(shareData);
+            return;
+          } catch (err) {
+            if (err.name === 'AbortError') return;
+          }
         }
-      });
 
-      function copyToClipboardFallback() {
+        // Fallback: Copy URL to clipboard
         try {
           const tempInput = document.createElement('input');
           tempInput.value = window.location.href;
@@ -347,11 +305,11 @@
           tempInput.select();
           document.execCommand('copy');
           document.body.removeChild(tempInput);
-          showToast('Link copied to clipboard');
+          showToast('लिंक क्लिपबोर्डवर कॉपी केली आहे');
         } catch (e) {
-          showToast('Unable to copy link');
+          showToast('कृपया URL कॉपी करा');
         }
-      }
+      });
     })();
   </script>
 </body>
